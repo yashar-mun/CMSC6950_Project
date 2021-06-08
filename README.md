@@ -7,14 +7,13 @@ Yashar Tavakoli
 
 ```
 bash Miniforge3-Linux-x86_64.sh
-conda create -n argopy
 ```
 
 ## Software setup
 
 ```
 conda install xarray fsspec scikit-learn erddapy gsw aiohttp netCDF4 dask toolz
-conda create -n argopy
+conda install -c conda-forge argopy
 ```
 For full argopy functionalities, also:
 
