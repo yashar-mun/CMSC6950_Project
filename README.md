@@ -21,3 +21,18 @@ For full argopy functionalities, also:
 ```
 conda install ipython ipywidgets tqdm Matplotlib Cartopy Seaborn
 ```
+
+## Some basic import/export testing with argopy
+
+```
+import matplotlib
+matplotlib.use('Agg')
+import import matplotlib.pyplot as plt
+from argopy import IndexFetcher as ArgoIndexFetcher
+
+idx = ArgoIndexFetcher().float([6902745, 6902746])
+idx.to_dataframe()
+idx.plot('trajectory')
+plt.title('Testing argopy native plotting')
+plt.savefig("argo.png")
+```
