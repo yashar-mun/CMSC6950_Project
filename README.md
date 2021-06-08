@@ -16,3 +16,8 @@ conda create -n argopy
 conda install xarray fsspec scikit-learn erddapy gsw aiohttp netCDF4 dask toolz
 conda create -n argopy
 ```
+For full argopy functionalities, also:
+
+```
+conda install ipython ipywidgets tqdm Matplotlib Cartopy Seaborn
+```
