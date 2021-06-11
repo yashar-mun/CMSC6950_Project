@@ -28,7 +28,11 @@ def reg_coef(x,y,label=None,color=None,**kwargs):
     ax.annotate('r = {:.2f}'.format(r), xy=(0.5,0.5), xycoords='axes fraction', ha='center', fontsize=25)
     ax.set_axis_off()
 
+import matplotlib as mpl
+mpl.rcParams["axes.labelsize"] = 20
+
 g = sns.PairGrid(df)
+
 g.map_diag(sns.histplot)
 g.map_lower(sns.scatterplot, alpha=0.5)
 
