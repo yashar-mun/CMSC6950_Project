@@ -25,7 +25,7 @@ from scipy.stats import pearsonr
 def reg_coef(x,y,label=None,color=None,**kwargs):
     ax = plt.gca()
     r,p = pearsonr(x,y)
-    ax.annotate('r = {:.2f}'.format(r), xy=(0.5,0.5), xycoords='axes fraction', ha='center')
+    ax.annotate('r = {:.2f}'.format(r), xy=(0.5,0.5), xycoords='axes fraction', ha='center', fontsize=25)
     ax.set_axis_off()
 
 g = sns.PairGrid(df)
