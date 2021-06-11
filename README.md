@@ -42,3 +42,11 @@ plt.savefig("argo.png")
    correlation between Level, Salinity, Pressure, and Temperature. Hopefully, I   
    would be able to sample from different geographical areas, to spot any  
    discrepancies.
+
+
+conda install basemap
+conda install -c conda-forge basemap-data-hires
+
+
+conda install geoplot -c conda-forge
+conda install -c conda-forge geopandas
