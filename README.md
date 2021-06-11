@@ -50,3 +50,5 @@ conda install -c conda-forge basemap-data-hires
 
 conda install geoplot -c conda-forge
 conda install -c conda-forge geopandas
+
+conda install seaborn
