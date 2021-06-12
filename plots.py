@@ -25,9 +25,9 @@ argo_loader = ArgoDataFetcher()
 # A loop for image generation causes some errors in argo_loader.
 # Time permitting, I'll look more into it.
 
-ds_points1 = argo_loader.profile(5905775, [35]).to_xarray() #indian ocean, off the coast of madagascar
-ds_points2 = argo_loader.profile(2900737, [35]).to_xarray() #Japan
-ds_points3 = argo_loader.profile(3900267, [35]).to_xarray() #Atlantic, south america
+ds_points1 = argo_loader.profile(5905775, [1]).to_xarray() #indian ocean, off the coast of madagascar
+ds_points2 = argo_loader.profile(2900737, [3]).to_xarray() #Japan
+ds_points3 = argo_loader.profile(3900267, [3]).to_xarray() #Atlantic, south america
 
 ds1 = ds_points1.argo.point2profile()
 ds2 = ds_points2.argo.point2profile()
@@ -62,3 +62,5 @@ g.map_diag(sns.histplot, color = 'green')
 g.map_lower(sns.scatterplot, alpha=0.5, color = 'green')
 g.map_upper(reg_coef, color = 'green')
 g.savefig("corr3.png")
+
+
