@@ -10,6 +10,9 @@ from scipy.stats import pearsonr
 
 matplotlib.use('Agg')
 
+from mpl_toolkits.basemap import Basemap
+
+import matplotlib.colors as colors
 
 
 def reg_coef(x,y,label=None,color=None,**kwargs):
@@ -37,10 +40,25 @@ df1 = ds1.to_dataframe()
 df2 = ds2.to_dataframe()
 df3 = ds3.to_dataframe()
 
-df1 = df1.reset_index(level='N_LEVELS') [['N_LEVELS','PRES','PSAL','TEMP']]
-df2 = df2.reset_index(level='N_LEVELS') [['N_LEVELS','PRES','PSAL','TEMP']]
-df3 = df3.reset_index(level='N_LEVELS') [['N_LEVELS','PRES','PSAL','TEMP']]
-    
+df1 = df1.reset_index(level='N_LEVELS') [['N_LEVELS','PRES','PSAL','TEMP','LONGITUDE','LATITUDE']]
+df2 = df2.reset_index(level='N_LEVELS') [['N_LEVELS','PRES','PSAL','TEMP','LONGITUDE','LATITUDE']]
+df3 = df3.reset_index(level='N_LEVELS') [['N_LEVELS','PRES','PSAL','TEMP','LONGITUDE','LATITUDE']]
+
+lon_average1 = df1["LONGITUDE"].mean()
+lat_average1 = df1["LATITUDE"].mean()
+
+lon_average2 = df2["LONGITUDE"].mean()
+lat_average2 = df2["LATITUDE"].mean()
+
+lon_average3 = df3["LONGITUDE"].mean()
+lat_average3 = df3["LATITUDE"].mean()
+
+
+df1.drop(['LONGITUDE', 'LATITUDE'], axis=1, inplace=True)
+df2.drop(['LONGITUDE', 'LATITUDE'], axis=1, inplace=True)
+df3.drop(['LONGITUDE', 'LATITUDE'], axis=1, inplace=True)
+
+
 df1 = df1.fillna(method='ffill').fillna(method='bfill')
 df2 = df2.fillna(method='ffill').fillna(method='bfill')
 df3 = df3.fillna(method='ffill').fillna(method='bfill')
@@ -64,3 +82,50 @@ g.map_upper(reg_coef, color = 'green')
 g.savefig("corr3.png")
 
 
+
+fig = plt.figure(figsize=(8, 8))
+m = Basemap(projection='cyl', resolution='i', llcrnrlat=-90, urcrnrlat=90, llcrnrlon=-180, urcrnrlon=180)
+m.etopo(scale=0.5, alpha=0.5)
+
+x, y = m(lon_average1, lat_average1)
+plt.plot(x, y, 'x', markersize=8, color='#1f77b4')
+
+x, y = m(lon_average2, lat_average2)
+plt.plot(x, y, 'x', markersize=8, color='red')
+
+x, y = m(lon_average3, lat_average3)
+plt.plot(x, y, 'x', markersize=8, color='green')
+
+plt.savefig("map.png")
+
+fig = plt.figure(figsize=(6,7)) # width, height in inches
+#ax =fig.add_axes([-0.02, 0.1, 0.74, 0.74]) 
+
+m = Basemap(projection='lcc', resolution='h', lat_0=43, lon_0=145, width=2E6, height=3E6)
+
+m.shadedrelief()
+m.drawcoastlines(color='gray')
+m.drawcountries(color='gray')
+
+ds_points = argo_loader.region([140, 150, 35, 50, 0, 100, '2015-06-01', '2015-12-30']).to_xarray()
+ds = ds_points.argo.point2profile()
+df = ds.to_dataframe()
+df = df.reset_index()
+df = df[['LATITUDE','LONGITUDE']]
+x,y = m(df['LONGITUDE'], df['LATITUDE'])
+
+thiscmap = plt.cm.get_cmap('viridis')
+
+m.hexbin(x, y, gridsize=[6,6], mincnt=1, cmap='summer', norm=colors.LogNorm(), alpha=0.4)     # better
+cbar = plt.colorbar()  # useful on thematic map
+cbar.ax.set_ylabel('# of profiles', rotation=270, fontsize = 15)
+
+lats = [43.0618,35.6762,38.2682,44.0958]
+lons = [141.3545,139.6503,140.8694,145.8336]
+names = ['Sapporo','Tokyo','Sendai','Kunashiri']
+x, y = m(lons, lats)
+m.scatter(x, y, 20, color="black", marker="o", edgecolor="k")
+for i in range(len(names)):
+    plt.text(x[i], y[i], names[i])
+
+plt.savefig("hexbin.png")
