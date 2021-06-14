@@ -1,5 +1,25 @@
 \documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
 \begin{document}
-Hello world!
-$Hello world!$ %math mode 
+
+\begin{figure}[b]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{corr1.png}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{corr2.png}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{corr3.png}
+    \end{subfigure}%
+    \caption[short]{Grid}
+    \end{figure}
+    
+
 \end{document}
