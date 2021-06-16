@@ -23,7 +23,7 @@ mpl.rcParams["axes.labelsize"] = 20 # Enlarging the size of pearsonr coefficient
 
 argo_loader = ArgoDataFetcher()
 
-#Fething argo data. For details, refer to the final report.
+# Fetching argo data. For details, refer to the final report.
 ds_points1 = argo_loader.profile(5905775, 1).to_xarray()  # Located in Indian Ocean
 ds_points2 = argo_loader.profile(2900737, 3).to_xarray()  # Located in Pacific Ocean
 ds_points3 = argo_loader.profile(3900267, 3).to_xarray()  # Located in South Atlantic
