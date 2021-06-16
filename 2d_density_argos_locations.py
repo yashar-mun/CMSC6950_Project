@@ -48,4 +48,4 @@ m.scatter(x, y, 20, color="black", marker="o", edgecolor="k")
 for i in range(len(names)):
     plt.text(x[i], y[i], names[i])
 
-plt.savefig("hexbin_argos_locations.png")
+plt.savefig("hexbin_argos_locations.png",bbox_inches='tight')
