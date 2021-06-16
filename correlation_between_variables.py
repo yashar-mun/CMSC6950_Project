@@ -58,7 +58,7 @@ locations = [location1, location2, location3, location4]
 
 
 # Perparing the world map
-fig = plt.figure(figsize=(15, 15))
+fig = plt.figure(figsize=(10, 10))
 m = Basemap(projection='cyl', resolution='i', llcrnrlat=-90, urcrnrlat=90, llcrnrlon=-180, urcrnrlon=180)
 m.etopo(scale=0.5, alpha=0.5)
 
