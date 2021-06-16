@@ -37,7 +37,7 @@ x,y = m(df['LONGITUDE'], df['LATITUDE'])
 thiscmap = plt.cm.get_cmap('viridis')
 m.hexbin(x, y, gridsize=[6,6], mincnt=1, cmap='summer', norm=colors.LogNorm(), alpha=0.4) 
 cbar = plt.colorbar() 
-cbar.ax.set_ylabel('# of profiles', rotation=270, fontsize = 15)
+cbar.ax.set_ylabel('# of argo reports', rotation=270, fontsize = 15)
 
 # Indication certain locations on the map
 lats = [43.0618,35.6762,38.2682,44.0958]
