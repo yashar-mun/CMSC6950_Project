@@ -69,7 +69,7 @@ for count, location in enumerate(locations):
     x, y = m(location[0], location[1])
     plt.plot(x, y, 'x', markersize = 15, mew = 3, color = color_list[count])
 
-plt.savefig("map_of_locations.png")
+plt.savefig("map_of_locations.png",bbox_inches='tight')
 
 # Plotting a customized correlation plot. Details in the report.
 for count, df in enumerate(dfs):
