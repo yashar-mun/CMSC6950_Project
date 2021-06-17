@@ -26,5 +26,5 @@ conda install -c conda-forge geopandas
 **Task no.2** - Correlation study of variables pertaining to arbitrary profiles of four argos, using scatter-plot, histogram, and Pearson's r coefficient.
 
 <img src="map_of_locations.png" width="70.3%">
-<img src="correlation1.png" width="35%"> <img src="correlation2.png" width="35%">  
-<img src="correlation3.png" width="35%"> <img src="correlation4.png" width="35%">  
+<img src="correlation1.png" width="35%"><img src="correlation2.png" width="35%">  
+<img src="correlation3.png" width="35%"><img src="correlation4.png" width="35%">  
