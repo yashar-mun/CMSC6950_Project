@@ -27,4 +27,4 @@ conda install -c conda-forge geopandas
 
 <img src="correlation1.png" width="35%"> <img src="correlation2.png" width="35%">  
 <img src="correlation3.png" width="35%"> <img src="correlation4.png" width="35%">  
-<img src="map_of_locations.png" width="70%">
+<img src="map_of_locations.png" width="70.3%">
