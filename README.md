@@ -19,11 +19,11 @@ conda install -c conda-forge geopandas
 ```
 ## Computational Tasks
 
-**Task no.1** - Density of the argos within certain geographical and time boundaries (more details in the report).
+**Task no.1** - Density of the argos within certain geographical and time boundaries.
 
 <img src="hexbin_argos_locations.png" width="45%">
 
-**Task no.2** - Correlation study of variables pertaining to arbitrary profiles of four argos, using scatter-plot, histogram, and Pearson's r coefficient (more details in the report).
+**Task no.2** - Correlation study of variables pertaining to arbitrary profiles of four argos, using scatter-plot, histogram, and Pearson's r coefficient.
 
 <img src="correlation1.png" width="35%"> <img src="correlation2.png" width="35%">  
 <img src="correlation3.png" width="35%"> <img src="correlation4.png" width="35%">  
