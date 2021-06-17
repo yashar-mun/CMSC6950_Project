@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{hyperref}
+\usepackage{float}
 
 \title{CMSC 6950 Project}
 \date{June 2021}
@@ -85,7 +86,7 @@ during a given time period:
  off the coast of Sapporo (in Hokkaido) with more than 1000 profile 
  reports. One curious fact is argos' low frequency north of Kunashiri.    
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.9]{hexbin_argos_locations.png}
 \caption{Hexbin plot of argo data}
@@ -170,14 +171,14 @@ the argos pertaining to the selected profiles.
         is between northern and southern hemisphere??
     \end{itemize}
 
-    \begin{figure}
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.7]{map_of_locations.png}
         \caption{Locations of the argos}
         \label{map}
         \end{figure}
     
-    \begin{figure}
+    \begin{figure}[H]
         \centering
         \begin{subfigure}{.5\textwidth}
             \centering
@@ -203,4 +204,11 @@ the argos pertaining to the selected profiles.
         \label{corr}
         \end{figure}
     
+\begin{thebibliography}{9}
+    \bibitem{latexcompanion} 
+    Maze et al.,
+    \textit{argopy: A Python library for Argo ocean data analysis.}. 
+    Journal of Open Source Software, 5(53), 2425, 2020.
+\end{thebibliography}
+
 \end{document}
