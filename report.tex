@@ -14,6 +14,20 @@
 \maketitle
 \section{Introduction}
 
+The ocean is a key component of the Earth climate system. It thus needs a 
+continuous real-time monitoring to help scientists better understand its dynamic 
+and predict its evolution. All around the world, oceanographers have managed to 
+join their efforts and set up a Global Ocean Observing System among which Argo
+ is a key component.\\
+
+Argo is a global network of nearly 4000 autonomous probes measuring pressure, 
+temperature and salinity from the surface to 2000m depth every 10 days. The 
+localisation of these probes is nearly random between the 60th parallels (see 
+live coverage here). All probes data are collected by satellite in real-time, 
+processed by several data centers and finally merged in a single dataset 
+(collecting more than 2 millions of vertical profiles data) made freely 
+available to anyone through a ftp server or monthly zip snapshots.\\
+
 This project in a nutshell, aims at fetching data from \verb|argopy|, manipulating the data a bit, and presenting the results
 through proper visualization. \verb|argopy| landing page states that it aims to 
 \begin{enumerate}
@@ -21,7 +35,7 @@ through proper visualization. \verb|argopy| landing page states that it aims to
     \item manipulation, and
     \item visualization. 
 \end{enumerate} 
-In my experience, visualization facilities of the argo is quite limited. So I have employed more powerful python
+In my experience, visualization facilities of the argopy is quite limited. So I have employed more powerful python
 libraries for visualization. \\
 
 Here is the workflow of this project (each python script is responsible for a single computational task):
@@ -159,6 +173,17 @@ visualization which help us get an idea of the correlation
 between the variables in question. To do this I have 
 devised a composite plot from thee components: 
 
+\begin{figure}[!ht]
+    \begin{tabular}{cc}
+        \hspace{-30pt} \includegraphics[width=70mm]{correlation1.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation2.png} \\
+        (a) Location: Indian Ocean & (b) Location: North Pacific \\[15pt]
+        \hspace{-30pt} \includegraphics[width=70mm]{correlation3.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation4.png} \\
+        (c) Location: South Atlantic & (d) Location: North Atlantic \\[15pt]
+        \end{tabular}
+        \caption{Correlation between the variables}
+        \label{corr}
+\end{figure}
+
 \begin{enumerate}
     \item The lower-triangle consists of pairwise scatter-plots.
     \item The diagonal consists of histogram bars illustrating 
@@ -178,19 +203,6 @@ devised a composite plot from thee components:
 Now lets take a couple of notes regarding the
 correlation between the variables as illustrated in
 Fig.\ref{corr}:
-    
-
-    
-\begin{figure}[!ht]
-    \begin{tabular}{cc}
-        \hspace{-30pt} \includegraphics[width=70mm]{correlation1.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation2.png} \\
-        (a) Location: Indian Ocean & (b) Location: North Pacific \\[15pt]
-        \hspace{-30pt} \includegraphics[width=70mm]{correlation3.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation4.png} \\
-        (c) Location: South Atlantic & (d) Location: North Atlantic \\[15pt]
-        \end{tabular}
-        \caption{Correlation between the variables}
-        \label{corr}
-    \end{figure}
     
 \begin{itemize}
     \item The scatter plots and coefficients for all the cases 
