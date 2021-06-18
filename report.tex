@@ -24,7 +24,7 @@ through proper visualization. \verb|argopy| landing page states that it aims to
 In my experience, visualization facilities of the argo is quite limited. So I have employed more powerful python
 libraries for visualization. \\
 
-Here is the workflow of this project (each python script is responsible for one computational task):
+Here is the workflow of this project (each python script is responsible for a single computational task):
 
 \begin{equation*}
     \begin{rcases}
@@ -43,7 +43,7 @@ Here is the workflow of this project (each python script is responsible for one 
     \text{report.pdf}
 \end{equation*}
 
-Without further without further adieu, I will explain the two computational tasks I
+Now without further further adieu, I will explain the two computational tasks I
 took on.
 
 \section{Density of argos' locations}
@@ -108,7 +108,7 @@ during a given time period:
  off the coast of Sapporo (in Hokkaido) with more than 1000 profile 
  reports. One curious fact is argos' low frequency north of Kunashiri.    
 
-\begin{figure}[!htb]
+\begin{figure}[!h]
 \centering
 \includegraphics[scale=0.9]{hexbin_argos_locations.png}
 \caption{Hexbin plot of argo data}
@@ -147,6 +147,13 @@ latitudes,
 I have taken a mean to get an idea about the whereabouts of 
 the argos pertaining to the selected profiles.\\
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[scale=0.7]{map_of_locations.png}
+    \caption{Locations of the argos}
+    \label{map}
+\end{figure}
+
 Now back to the main task at hand, we need a proper 
 visualization which help us get an idea of the correlation
 between the variables in question. To do this I have 
@@ -172,6 +179,19 @@ Now lets take a couple of notes regarding the
 correlation between the variables as illustrated in
 Fig.\ref{corr}:
     
+
+    
+\begin{figure}[!ht]
+    \begin{tabular}{cc}
+        \hspace{-30pt} \includegraphics[width=70mm]{correlation1.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation2.png} \\
+        (a) Location: Indian Ocean & (b) Location: North Pacific \\[15pt]
+        \hspace{-30pt} \includegraphics[width=70mm]{correlation3.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation4.png} \\
+        (c) Location: South Atlantic & (d) Location: North Atlantic \\[15pt]
+        \end{tabular}
+        \caption{Correlation between the variables}
+        \label{corr}
+    \end{figure}
+    
 \begin{itemize}
     \item The scatter plots and coefficients for all the cases 
     indicate a near-perfectly
@@ -190,25 +210,10 @@ Fig.\ref{corr}:
     is between northern and southern hemisphere??
 \end{itemize}
 
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.7]{map_of_locations.png}
-    \caption{Locations of the argos}
-    \label{map}
-\end{figure}
-    
-    
-\begin{figure}[!htb]
-\begin{tabular}{cc}
-    \hspace{-30pt} \includegraphics[width=70mm]{correlation1.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation2.png} \\
-    (a) Location: Indian Ocean & (b) Location: North Pacific \\[15pt]
-    \hspace{-30pt} \includegraphics[width=70mm]{correlation3.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation4.png} \\
-    (c) Location: South Atlantic & (d) Location: North Atlantic \\[15pt]
-    \end{tabular}
-    \caption{Correlation between the variables}
-    \label{corr}
-\end{figure}
+\section{Conclusion}
+In this project, I implemented two computational tasks involving argopy, where
+data is fetched from external sources and visualized properly with python plotting
+libraries.
 
 \begin{thebibliography}{9}
     \bibitem{latexcompanion} 
