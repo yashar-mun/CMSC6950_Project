@@ -3,6 +3,7 @@
 \usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{float}
+\usepackage{mathtools}
 
 \title{CMSC 6950 Project}
 \date{June 2021}
@@ -21,7 +22,28 @@ through proper visualization. \verb|argopy| landing page states that it aims to
     \item visualization. 
 \end{enumerate} 
 In my experience, visualization facilities of the argo is quite limited. So I have employed more powerful python
-libraries for visualization. Without further without further adieu, I will explain the two computational tasks I
+libraries for visualization. \\
+
+Here is the workflow of this project (each python script is responsible for one computational task):
+
+\begin{equation*}
+    \begin{rcases}
+    \text{correlation\underline{\hspace{8pt}}between\underline{\hspace{8pt}}variables.py}\hspace{2pt}\begin{cases}
+      \text{hexbin\underline{\hspace{8pt}}argos\underline{\hspace{8pt}}locations.png}
+    \end{cases}
+    \\
+    \text{correlation\underline{\hspace{8pt}}between\underline{\hspace{8pt}}variables.py}\begin{cases}
+        \text{map\underline{\hspace{8pt}}of\underline{\hspace{8pt}}locations.png}\\
+        \text{correlation1.png}\\
+        \text{correlation2.png}\\
+        \text{correlation3.png}\\
+        \text{correlation4.png}
+    \end{cases}
+    \end{rcases}
+    \text{report.pdf}
+\end{equation*}
+
+Without further without further adieu, I will explain the two computational tasks I
 took on.
 
 \section{Density of argos' locations}
