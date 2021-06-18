@@ -46,7 +46,7 @@ One of the more sophisticated density plots perhaps, is
 \verb|seaborn.kdeplot|. 
 But seaborn is not integrated with \verb|mpl_toolkits.basemap|,
 which is the library I will use for the underlay geographical 
-map(a map-less plot would also suffer from poor interpret-ability). 
+map (a map-less plot would also suffer from poor interpret-ability). 
 Instead of \verb|seaborn.kdeplot|, I will use 
 \verb|matplotlib.pyplot.hexbin| which
 is well integrated with \verb|basemap|.\\
@@ -54,7 +54,7 @@ is well integrated with \verb|basemap|.\\
 Now regarding the geographically bounded argo data, 
 during a given time period:
  \begin{itemize}
-     \item one can use \verb|argo_loader.region().to_xarray()| which takes longitude, latitude, and time period as arguments, and 
+     \item One can use \verb|argo_loader.region().to_xarray()| which takes longitude, latitude, and time period as arguments, and 
      returns the argo data in multidimensional \verb|xarray|.
      \item Since working
      with Pandas (2-dimensional) data-frames is more straightforward, 
@@ -68,7 +68,7 @@ during a given time period:
      we do not need any of the indices so I have discarded 
      the indices (using \verb|reset_index()|). Furthermore I 
      have dismissed all
-     the columns but LONGITUDE and LATITUDE. 
+     the columns but longitude and latitude. 
      Lastly before 
      drawing the \verb|matplotlib.pyplot.hexbin| on the map, I have
      prepared the data for \verb|mpl_toolkits.basemap|.
@@ -86,7 +86,7 @@ during a given time period:
  off the coast of Sapporo (in Hokkaido) with more than 1000 profile 
  reports. One curious fact is argos' low frequency north of Kunashiri.    
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale=0.9]{hexbin_argos_locations.png}
 \caption{Hexbin plot of argo data}
@@ -94,7 +94,7 @@ during a given time period:
 \end{figure}
 
 \section{A correlation analysis of Level, Pressure, Salinity, 
-and Temperature}
+and Temperature.}
 
 A question one might ask regarding argo data, would be the correlation 
 between each pair in Level, 
@@ -130,77 +130,64 @@ visualization which help us get an idea of the correlation
 between the variables in question. To do this I have 
 devised a composite plot from thee components: 
 
-    \begin{enumerate}
-        \item The lower-triangle consists of pairwise scatter-plots.
-        \item The diagonal consists of histogram bars illustrating 
-        the distribution of variables.
-        \item the upper-triangle indicates the Pearson's r 
-        coefficient for each pair of variables 
-        (implemented though \verb|reg_coef()| 
-        in the code). The Pearson's r ranges from 1 to -1.
-        A value close to 1 (-1) indicates a (reverse) near
-        perfect linear relationship between the variables.
-        A value close to 0, implies that there is almost no 
-        linear correlation between the variables.
-    \end{enumerate}
+\begin{enumerate}
+    \item The lower-triangle consists of pairwise scatter-plots.
+    \item The diagonal consists of histogram bars illustrating 
+    the distribution of variables.
+    \item The upper-triangle indicates the Pearson's r 
+    coefficient for each pair of variables 
+    (implemented though \verb|reg_coef()| 
+    in the code). The Pearson's r ranges from 1 to -1.
+    A value close to 1 (-1) indicates a (reverse) near
+    perfect linear relationship between the variables.
+    A value close to 0, implies that there is almost no 
+    linear correlation between the variables.
+\end{enumerate}
 
 
 
-    Now lets take a couple of notes regarding the
-    correlation between the variables as illustrated In
-    Fig.\ref{corr}:
+Now lets take a couple of notes regarding the
+correlation between the variables as illustrated in
+Fig.\ref{corr}:
     
-    \begin{itemize}
-        \item The scatter plots and coefficients for all the cases 
-        indicate a near-perfectly
-        linear relationship between Pressure and Level. 
-        \item All the plots also demonstrate that there exist a 
-        significant reverse linear relationship between Temperature 
-        and Level,
-        as well as Temperature and pressure.
-        \item The rest of the pair of variables show non-conclusive 
-        behavior. The situation here would entail a more educated 
-        investigation. That said, curiously there is no near-zero 
-        coefficient for any of the pairs.
-        \item The variables are similarly correlated pertaining to 
-        profiles from Indian Ocean, South Atlantic. Same with North Atlantic
-        and North Pacific. So a crude non-educated guess: the divide 
-        is between northern and southern hemisphere??
-    \end{itemize}
+\begin{itemize}
+    \item The scatter plots and coefficients for all the cases 
+    indicate a near-perfectly
+    linear relationship between Pressure and Level. 
+    \item All the plots also demonstrate that there exist a 
+    significant reverse linear relationship between Temperature 
+    and Level,
+    as well as Temperature and Pressure.
+    \item The rest of the pair of variables show non-conclusive 
+    behavior. The situation here would entail a more educated 
+    investigation. That said, curiously there is no near-zero 
+    coefficient for any of the pairs.
+    \item The variables are similarly correlated pertaining to 
+    profiles from Indian Ocean, South Atlantic. Same with North Atlantic
+    and North Pacific. So a crude non-educated guess: the divide 
+    is between northern and southern hemisphere??
+\end{itemize}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.7]{map_of_locations.png}
-        \caption{Locations of the argos}
-        \label{map}
-        \end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.7]{map_of_locations.png}
+    \caption{Locations of the argos}
+    \label{map}
+\end{figure}
     
-    \begin{figure}[H]
-        \centering
-        \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{correlation1.png}
-        \caption{Location: Indian Ocean}
-        \end{subfigure}%
-        \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{correlation2.png}
-        \caption{Location: North Pacific}
-        \end{subfigure}
-        \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{correlation3.png}
-        \caption{Location: South Atlantic}
-        \end{subfigure}%
-        \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{correlation4.png}
-        \caption{Location: North Atlantic}
-        \end{subfigure}%
-        \caption[short]{Correlation between the variables}
-        \label{corr}
-        \end{figure}
     
+\begin{figure}[!htb]
+\begin{tabular}{cc}
+    \hspace{-30pt} \includegraphics[width=70mm]{correlation1.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation2.png} \\
+    (a) Location: Indian Ocean & (b) Location: North Pacific \\[15pt]
+    \hspace{-30pt} \includegraphics[width=70mm]{correlation3.png} &\hspace{10pt}   \includegraphics[width=70mm]{correlation4.png} \\
+    (c) Location: South Atlantic & (d) Location: North Atlantic \\[15pt]
+    \end{tabular}
+    \caption{Correlation between the variables}
+    \label{corr}
+\end{figure}
+
 \begin{thebibliography}{9}
     \bibitem{latexcompanion} 
     Maze et al.,
