@@ -14,12 +14,13 @@ conda install ipython ipywidgets tqdm matplotlib cartopy seaborn
 argopy itself:
 
 ```
-conda install numpy scipy pandas
+conda install -c conda-forge argopy
 ```
 
-other dependencies:
+other dependencies of the project:
 
 ```
+conda install numpy scipy pandas basemap
 conda install -c conda-forge basemap-data-hires
 conda install geoplot -c conda-forge
 conda install -c conda-forge geopandas
