@@ -8,6 +8,8 @@ import matplotlib.colors as colors
 # Needed to save figures in wsl environment
 mpl.use('Agg')
 
+print('Setup in progress...')
+
 argo_loader = ArgoDataFetcher()
 
 fig = plt.figure(figsize=(6,7)) 
@@ -17,6 +19,9 @@ m = Basemap(projection='lcc', resolution='h', lat_0=43, lon_0=145, width=2E6, he
 m.shadedrelief()
 m.drawcoastlines(color='gray')
 m.drawcountries(color='gray')
+
+print('argopy is fetching data from external sources...')
+print('(In case of a timeout from the external source, try again.)')
 
 # Fetching argo data. For details, refer to the final report.
 ds_points = argo_loader.region([140, 150, 35, 50, 0, 100, '2015-06-01', '2015-12-30']).to_xarray()

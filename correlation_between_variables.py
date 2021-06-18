@@ -8,6 +8,7 @@ import seaborn as sns   # For plotting
 #Needed to save figures in wsl environment
 mpl.use('Agg')
 
+print('Setup in progress...')
 
 def reg_coef(x,y,label=None,color=None,**kwargs):
     '''Plots the pearsonr coefficient for each pair
@@ -22,6 +23,9 @@ def reg_coef(x,y,label=None,color=None,**kwargs):
 mpl.rcParams["axes.labelsize"] = 20 # Enlarging the size of pearsonr coefficients appearing on the plot
 
 argo_loader = ArgoDataFetcher()
+
+print('argopy is fetching data from external sources...')
+print('(In case of a timeout from the external source, try again.)')
 
 # Fetching argo data. For details, refer to the final report.
 ds_points1 = argo_loader.profile(5905775, 1).to_xarray()  # Located in Indian Ocean
