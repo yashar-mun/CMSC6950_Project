@@ -5,18 +5,26 @@ Yashar Tavakoli
 
 ## Software setup
 
-```
-conda create --name argopy
-conda activate argopy
-conda init
+argopy dependencies:
 
+```
+conda install xarray fsspec scikit-learn erddapy gsw aiohttp netCDF4 dask toolz
 conda install ipython ipywidgets tqdm matplotlib cartopy seaborn
-conda install basemap
+```
+argopy itself:
+
+```
+conda install numpy scipy pandas
+```
+
+other dependencies:
+
+```
 conda install -c conda-forge basemap-data-hires
 conda install geoplot -c conda-forge
 conda install -c conda-forge geopandas
-
 ```
+
 ## Computational Tasks
 
 **Task no.1** - Density of the argos within certain geographical and time boundaries.
