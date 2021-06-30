@@ -14,31 +14,28 @@
 \maketitle
 \section{Introduction}
 
-The ocean is a key component of the Earth climate system. It thus needs a 
-continuous real-time monitoring to help scientists better understand its dynamic 
-and predict its evolution. All around the world, oceanographers have managed to 
-join their efforts and set up a Global Ocean Observing System among which Argo
- is a key component.\\
+Argo is the name of 
+an international data-collection program in oceanography. 
+The program consists of a fleet of instruments around the globe, 
+which operate
+autonomously to measure and report different ocean variables. 
+In this report, the name argo refer to both the program, and the
+instruments.
+Argo data is massive and can be nonhomogeneous. Thanks
+to argopy (which is a light-weight
+python library) however, accessing argo data can be quite hassle-free. The mentioned
+library, also provides data manipulation and visualization
+facilities. \\
 
-Argo is a global network of nearly 4000 autonomous probes measuring pressure, 
-temperature and salinity from the surface to 2000m depth every 10 days. The 
-localisation of these probes is nearly random between the 60th parallels (see 
-live coverage here). All probes data are collected by satellite in real-time, 
-processed by several data centers and finally merged in a single dataset 
-(collecting more than 2 millions of vertical profiles data) made freely 
-available to anyone through a ftp server or monthly zip snapshots.\\
+This project consists of two computational tasks, which in a 
+nutshell, aim at fetching data from \verb|argopy|, 
+manipulating the data a bit, and presenting the results
+through proper visualization. In my experience, out-of-the-box
+visualization provisions of argopy, is quite primitive. So I have 
+employed more powerful python libraries for visualization. \\
 
-This project in a nutshell, aims at fetching data from \verb|argopy|, manipulating the data a bit, and presenting the results
-through proper visualization. \verb|argopy| landing page states that it aims to 
-\begin{enumerate}
-    \item ease argo data access, 
-    \item manipulation, and
-    \item visualization. 
-\end{enumerate} 
-In my experience, visualization facilities of the argopy is quite limited. So I have employed more powerful python
-libraries for visualization. \\
-
-Here is the workflow of this project (each python script is responsible for a single computational task):
+Before diving in, here is the workflow of this project 
+(each python script is responsible for a single computational task):
 
 \begin{equation*}
     \begin{rcases}
@@ -62,20 +59,23 @@ took on.
 
 \section{Density of argos' locations}
 
-Every argo during its lifetime visits sequence of 
-locations (at different depth). Having said that, the frequency of
-locations (in form longitude and latitude pairs) within every geographical boundary over a certain period of time,
-would be non-uniform. So an interesting question would be: in given a geographical boundary in the form of a box defined
-by latitude and longitude coordinates, which points are visited by argos and how much?\\
-
-Scatter-plot would be a quick approach to this problem. Scatter-plots however suffer from certain shortcomings:
+Every argo during its lifetime, visits a sequence of 
+locations (at different depths). Each location during a time-period
+therefore, can be visited by any number of argos. Provided that the location
+does not point to land of course. Now an interesting question one can ask, would
+be: how frequent a location is visited by argos during a certain time-period?
+Or more interestingly, one can look at a certain geographical region instead.
+A scatter-plot over a longitude-latitude box, would be a quick 
+approach to answer the mentioned question. That said, 
+scatter-plots suffer from certain shortcomings:
 
 \begin{itemize}
-    \item When the data is dense, a scatter plot would be messy less interpret-able to the eye. 
-    \item There is no visual component accompanying scatter-plots, whereby one can learn the exact number of points in a given region.
+    \item When the data is dense, a scatter plot would be messy and less interpret-able to the eye. 
+    \item There is no visual component accompanying scatter-plots, whereby one can learn the number of points in a given area.
 \end{itemize}
 
-A workaround in this situation would be some sort of 2-dimensional \textit{destiny plot}, whereby
+A workaround in this situation, would be some sort of 2-dimensional 
+\textit{destiny plot}, whereby
 the distribution of data is more readily observable. \\
 
 One of the more sophisticated density plots perhaps, is 
@@ -85,10 +85,9 @@ which is the library I will use for the underlay geographical
 map (a map-less plot would also suffer from poor interpret-ability). 
 Instead of \verb|seaborn.kdeplot|, I will use 
 \verb|matplotlib.pyplot.hexbin| which
-is well integrated with \verb|basemap|.\\
+is well integrated with \verb|basemap|, and provides comparable results.\\
 
-Now regarding the geographically bounded argo data, 
-during a given time period:
+To fetch geographically bounded argo data in a given time-period:
  \begin{itemize}
      \item One can use \verb|argo_loader.region().to_xarray()| which takes longitude, latitude, and time period as arguments, and 
      returns the argo data in multidimensional \verb|xarray|.
@@ -100,27 +99,29 @@ during a given time period:
      (using \verb|to_dataframe()|).
      \item Flattening a multidimensional \verb|xarray| to 
      2-dimensional produces a multi-index data-frame. 
-     In computation task no.1, 
+     In computational task no.1, 
      we do not need any of the indices so I have discarded 
      the indices (using \verb|reset_index()|). Furthermore I 
      have dismissed all
      the columns but longitude and latitude. 
-     Lastly before 
+     Lastly, before 
      drawing the \verb|matplotlib.pyplot.hexbin| on the map, I have
      prepared the data for \verb|mpl_toolkits.basemap|.
  \end{itemize}
 
- As depicted Fig.\ref{hexbin} in The region I have chosen for 
- this task stretches from 140 to 150 
+ As depicted in Fig.\ref{hexbin}, the region I have chosen for 
+ this task, stretches from 140 to 150 
  in longitude, and from 35 to 50 in latitude (around Japan). 
  The time-frame is chosen to be a six months period between 
  2015-06-01 and 2015-12-30. The image depicts the result. One
- last step I performed is highlighting some locations on the map 
+ last step I performed as manifest in the image, 
+ is highlight some locations on the map 
  to be able to better explain the plot: It seems to be
- more-or-less to say that argos cover offshore more frequently 
+ fair to say that argos cover offshore more frequently 
  than ports such as Sendai. One exception perhaps, would be
- off the coast of Sapporo (in Hokkaido) with more than 1000 profile 
- reports. One curious fact is argos' low frequency north of Kunashiri.    
+ off the coast of Sapporo (in Hokkaido) with more than 1000 
+ reports. One other curious fact perhaps, is argos' low frequency around 
+ north of Kunashiri.    
 
 \begin{figure}[!h]
 \centering
@@ -133,23 +134,24 @@ during a given time period:
 and Temperature.}
 
 A question one might ask regarding argo data, would be the correlation 
-between each pair in Level, 
-Pressure, Salinity, and Temperature. To keep the computations light, 
+between each pair in \{Level, 
+Pressure, Salinity, Temperature\}. To keep the computations light, 
 I have singled out four profiles from four different
 argos located in Indian Ocean, South Atlantic, North Atlantic, and 
 Pacific (using the service provided by 
-\href{https://fleetmonitoring.euro-argo.eu/dashboard?Status=Active}{fleetmonitoring.euro-argo}). Now to fetch  
-the data I have used \verb|argo_loader.profile().to_xarray()|, which 
-takes the argo WMO and profile numbers, and returns the data
+\href{https://fleetmonitoring.euro-argo.eu/dashboard?Status=Active}{fleetmonitoring.euro-argo}). 
+To fetch  
+the data, I have used \verb|argo_loader.profile().to_xarray()|, which 
+takes in the argo WMO and profile numbers, and returns the data
 in the form of four different \verb|xarrays| (I have chosen profile 
 numbers 
 manually, so that the produced plots show decent diversity).\\
 
 Next, as explained in task no.1, I have flattened the \verb|xarrays| 
 and converted them to Panda's data-frames. Here, unlike
-task no.1, the produced indices in the data-frames are not useless: 
-the Level variable the data-frames is defined as 
-index. As a first step, I have reintroduced Level as a column and 
+task no.1, the produced indices in the data-frames are useful: 
+the Level variable in the data-frames, is defined as 
+index. As the first step, I have reintroduced Level as a column and 
 dismissed all the column except Level, Pressure, 
 Salinity, and Temperature.\\
 
@@ -170,8 +172,8 @@ the argos pertaining to the selected profiles.\\
 
 Now back to the main task at hand, we need a proper 
 visualization which help us get an idea of the correlation
-between the variables in question. To do this I have 
-devised a composite plot from thee components: 
+between the variables in question. To do this, I have 
+devised a composite plot from three components: 
 
 \begin{figure}[!ht]
     \begin{tabular}{cc}
@@ -206,20 +208,20 @@ Fig.\ref{corr}:
     
 \begin{itemize}
     \item The scatter plots and coefficients for all the cases 
-    indicate a near-perfectly
+    indicate a near perfect
     linear relationship between Pressure and Level. 
     \item All the plots also demonstrate that there exist a 
     significant reverse linear relationship between Temperature 
     and Level,
     as well as Temperature and Pressure.
     \item The rest of the pair of variables show non-conclusive 
-    behavior. The situation here would entail a more educated 
+    behavior. The situation here perhaps, would entail a more educated 
     investigation. That said, curiously there is no near-zero 
     coefficient for any of the pairs.
     \item The variables are similarly correlated pertaining to 
-    profiles from Indian Ocean, South Atlantic. Same with North Atlantic
-    and North Pacific. So a crude non-educated guess: the divide 
-    is between northern and southern hemisphere??
+    profiles from Indian Ocean, and South Atlantic. Same with North Atlantic
+    and North Pacific. Hence a crude non-educated guess: the divide 
+    is between northern and southern hemisphere (?).
 \end{itemize}
 
 \section{Conclusion}
